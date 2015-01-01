@@ -1,30 +1,28 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
+	"flag"
 	"log"
+	"os/exec"
 
 	"github.com/Pursuit92/github"
 )
 
 func main() {
-	ch, err := github.ReceiveHooks(":8080")
-	if err != nil {
-		log.Fatal(err)
+	addr := flag.String("addr", ":8080", "Address to listen for hooks")
+	site := flag.String("site", "", "Site location")
+	flag.Parse()
+	if *site == "" {
+		log.Fatal("Must supply site directory")
 	}
-	for out := range ch {
-		fmt.Print(json.MarshalIndent(out, "", "  "))
-		/*
-			repo := out.Repository.Name
-			if repo == "" {
-				return
-			}
-			cwd := "./" + repo
+	ch, errch := github.ReceiveHooks(*addr)
+	for {
+		select {
+		case <-ch:
 			gitPull := exec.Command("/usr/bin/git", "pull")
-			hugo := exec.Command("/usr/local/bin/hugo", "-s", cwd)
-			gitPull.Dir = cwd
-			hugo.Dir = cwd
+			hugo := exec.Command("/usr/local/bin/hugo", "-s", *site)
+			//			gitPull.Dir = cwd
+			//			hugo.Dir = cwd
 			err := gitPull.Run()
 			if err != nil {
 				log.Fatal(err)
@@ -35,6 +33,8 @@ func main() {
 				log.Fatal(err)
 			}
 			log.Println("Hugo ran successfully!")
-		*/
+		case err := <-errch:
+			log.Fatal(err)
+		}
 	}
 }
