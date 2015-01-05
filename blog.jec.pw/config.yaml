@@ -1,8 +1,8 @@
 ---
 
-baseurl:            http://blog.nilproductions.com/
+baseurl:            http://blog.jec.pw/
 pygmentsuseclasses: true 
-theme:              hugo-incorporated
+theme:              jec-inc
 languageCode: en-us
 
 params:
@@ -10,13 +10,14 @@ params:
     # Blog Information
     title:        "Josh Chase"
     subtitle:     "It's a blog!"
+    brand: JEC
     cover_image:  blog-cover.jpg
     logo:         logo.png
     
     # Company information
-    company:      nil productions 
-    #url:          http://nilproductions.com/
-#    facebook:     
+    company:      "Josh Chase"
+    url:          http://blog.jec.pw
+    #    facebook:     
     github:       Pursuit92
     twitter:      Pursuit92
 #    gplus:        ''
@@ -52,3 +53,6 @@ params:
     google_font: 'Droid+Sans:400,700'
     
     # Setup your fonts, colors etc at _assets/stylesheets/main.scss
+
+    nav_links:
+        blog: /

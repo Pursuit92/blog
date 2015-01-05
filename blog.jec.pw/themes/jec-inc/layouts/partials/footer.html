@@ -1,0 +1,35 @@
+{{ $base := .Site.BaseUrl }}
+<footer class="site-footer">
+    <div class="container">
+        <nav>
+            <a href="{{ $base }}">{{ .Site.Params.inc.brand }}</a> &middot;
+			  {{ range $k, $v := .Site.Params.inc.nav_links }}
+			  <a href="{{ $base }}{{ $v }}">{{ title $k }}</a>
+			  {{ end }}
+        </nav>
+        
+        <nav class="social">
+            {{ with .Site.Params.inc.twitter }}
+            <a href="https://twitter.com/{{ . }}" title="Follow on Twitter" target="_blank"><i class="icon icon-twitter black"></i></a>
+            {{ end }}
+            {{ with .Site.Params.inc.github }}
+            <a href="https://github.com/{{ . }}" title="Follow on Github" target="_blank"><i class="icon icon-github black"></i></a>
+            {{ end }}
+            {{ with .Site.Params.inc.facebook }}
+            <a href="http://facebook.com/{{ . }}" title="Follow on Facebook" target="_blank"><i class="icon icon-facebook black"></i></a>
+            {{ end }}    
+			<a href="{{ .Site.BaseUrl }}/index.xml" title="RSS Feed">
+                <i class="icon icon-rss black"></i>
+            </a>
+        </nav>
+    </div>
+</footer>
+{{ partial "_scripts.html" . }}
+
+  <!-- 
+     <p>Incorporated theme by <a href="https://sendtoinc.com">Inc</a></p>
+     <p>Hugo port by @imperialwicket: https://github.com/imperialwicket/hugo-incorporated</p>
+  -->
+
+</body>
+</html>

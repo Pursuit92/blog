@@ -1,0 +1,5 @@
+
+{{ $base := .Site.BaseUrl }}
+			  {{ range $k, $v := .Site.Params.inc.nav_links }}
+			  <li><a href="{{ $base }}{{ $v }}">{{ title $k }}</a></li>
+			  {{ end }}
